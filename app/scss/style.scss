@@ -3,10 +3,20 @@
 @import 'fonts';
 // start header
 .header{
-    // position: fixed;
-    padding-top: 48px;
+    position: fixed;
+  
     width: 100%;
+    z-index: 10;
+    transition: all .3s;
+    &.active{
+        background-color: $red;
+    }
+    &__logo{
+        position: relative;
+        z-index: 15;
+    }
     &__inner{
+        height: 81px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -21,8 +31,32 @@
         @extend %open;
         font-size: 18px;
         color: #fff;
+        transition: all .3s;
+       position: relative;
+       &::after{
+           content: "";
+          
+           position: absolute;
+           left: 50%;
+           transform: translateX(-50%);
+           bottom: 0;
+           height: 3px;
+           width: 0;
+           background-color: #fff;
+           transition: all .3s;
+       }
+        &.active{
+            &::after{
+                width: 100%;
+              
+            }
+        }
+    }
+    .hamburger{
+        display: none;
     }
 }
+
 // end header
 // start top
 .top{
@@ -31,6 +65,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    margin-bottom: 50px;
+    &__wrapper{
+        background-color: rgba(#000, .7);
+        min-height: 100%;
+    }
     &__inner{
         padding: 350px 0 231px;
         max-width: 730px;
@@ -44,13 +83,14 @@
     }
     &__btn{
         border: 2px solid #fff;
-        transition: all .3s;
+        transition: background-color .3s;
         &+&{
             margin-left: 30px;
         }
         &:hover{
             background-color: $red;
             border: transparent;
+      
         }
     }
 }
@@ -64,6 +104,7 @@
     }
     &__box{
         max-width: 570px;
+        margin-bottom: 40px;
     }
     &__text{
         margin-bottom: 37px;
@@ -76,7 +117,6 @@
 .about__accordeon{
    
     &-item{
-      
        max-width: 570px;
         width: 100%;
     }
@@ -97,15 +137,21 @@
       padding-top: 20px;
       padding-left: 23px;
       color: #312f2f;
-      
+      transition: all 0s;
+      svg{
+        transform: rotate(0deg);
+          transition: transform .7s;
+         
+      }
   }
     &-text{
         transition: all .5s;
      margin-top: 0;
       height: 0;
       overflow: hidden;
-  padding: 0;
+  padding: 0 25px;
       border: none;
+      transition: all .7s;
     }
 }
 .about__accordeon-item.active{
@@ -131,6 +177,7 @@
     &__inner{
         padding: 74px 0 100px;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
 
     }
@@ -152,6 +199,7 @@
             background-color: $red;
             border-radius: 50%;
             z-index: -1;
+            animation: radial-pulse 1s infinite;
         }
         &::after{
             content: "";
@@ -182,6 +230,15 @@
     }
 }
 }
+@keyframes radial-pulse {
+    0% {
+      box-shadow: 0 0 0 0px rgba(#ff6863, 0.5);
+    }
+   
+    100% {
+      box-shadow: 0 0 0 30px rgba(#ff6863, 0);
+    }
+  }
 // end info
 // start video
 .video{
@@ -197,6 +254,9 @@
 }
 .work__slider-inner{
     position: relative;
+    width: 427px;
+    height: 273px;
+  
    &:hover{
     .work__slider-popup{
         opacity: 1;
@@ -211,10 +271,12 @@ img{
 }
 .work__slider-popup{
     position: absolute;
-    width: 427px;
-    height: 273px;
+ max-width: 100%;
+    outline: none;
     left: 0;
+    right: 0;
     top: 0;
+    bottom: 0;
     opacity: 0;
     background-color: rgba(#000, .5);
     transition: all .3s;
@@ -287,7 +349,7 @@ img{
  }
  &__button{
     border: 2px solid #fff;
-    transition: all .3s;
+    transition: background-color .3s;
     &+&{
         margin-left: 30px;
     }
@@ -305,15 +367,20 @@ img{
     &__inner{
         display: grid;
         grid-gap: 30px;
-        grid-template-columns: repeat(3,1fr);
-        grid-template-rows: repeat(3,1fr) ;
+        grid-template-columns: repeat(3,370px);
+        grid-template-rows: repeat(3,283px) ;
         grid-template-areas: 
         "i1 i1 i2"
         "i3 i4 i2"
         "i5 i6 i6";
     }
+  
  &__image-box{
      position: relative;
+     
+     background-repeat: no-repeat;
+     background-position: center center;
+     background-size: cover;
      &:hover{
          .portfolio__description{
             opacity: 1;
@@ -327,7 +394,7 @@ img{
         bottom: 0;
         left: 0;
         width: 100%;
-        margin-bottom: 10px;
+    
         background-color: rgba(#000, .7);
         text-align: center;
         color: #fff;
@@ -412,7 +479,17 @@ img{
     &__progress-line--color{
         background-color: $red;
         height: 9px;
-      
+      animation: progress 3s;
+      animation-fill-mode: forwards;
+
+    }
+}
+@keyframes progress{
+    from{
+        width: 0;
+    }
+    to{
+        width: 100%;
     }
 }
 // end skills
@@ -462,6 +539,9 @@ border-top: 1px solid #eeeeee;
         min-height: 610px;
         box-shadow: 0px 0px 8.55px 0.45px rgba(164, 164, 164, 0.75);
         background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
         &:hover{
             border-top: 4px solid $red;
@@ -477,7 +557,7 @@ border-top: 1px solid #eeeeee;
         padding:50px 0 134px;
         border-bottom: 1px solid #cecccc;
         text-transform: uppercase;
-
+        width: 100%;
     }
     &__item-circle{
         width: 170px;
@@ -485,7 +565,7 @@ border-top: 1px solid #eeeeee;
         background-color: $red;
         border-radius: 50%;
        
-        transform: translate(62%,-50%);
+        transform: translateY(-50%);
        color: #fff;
        position: relative;
        &::after{
@@ -582,9 +662,13 @@ box-shadow: 0px 2px 4.75px 0.25px rgba(0, 0, 0, 0.25);
 .contacts{
     padding: 135px 0 80px;
     background-color: #2a2a2a;
+    color: #fff;
     &__inner{
         display: flex;
         justify-content: space-between;
+    }
+    &__title{
+        color: #fff;
     }
     &__text{
         max-width: 390px;
