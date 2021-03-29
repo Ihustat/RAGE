@@ -302,6 +302,84 @@ img{
 .portfolio{
     padding: 140px 0;
     background-color: #f2f2f2;
+    &__inner{
+        display: grid;
+        grid-gap: 30px;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(3,1fr) ;
+        grid-template-areas: 
+        "i1 i1 i2"
+        "i3 i4 i2"
+        "i5 i6 i6";
+    }
+ &__image-box{
+     position: relative;
+     &:hover{
+         .portfolio__description{
+            opacity: 1;
+         }
+     }
+
+ }
+    &__description{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin-bottom: 10px;
+        background-color: rgba(#000, .7);
+        text-align: center;
+        color: #fff;
+        @extend %open;
+        padding-top: 80px;
+        opacity: 0;
+        transition: all .3s;
+        &-title{
+            font-size: 18px;
+        }
+        &-text{
+            margin-bottom: 15px;
+        }
+    }
+    &__description-icon{
+       display: inline-block;
+       color: #818181;
+       width: 47px;
+       height: 47px;
+       border: 1px solid #818181;
+       border-radius: 50%;
+       padding: 12px 10px;
+       cursor: pointer;
+       transition: all .3s;
+       &+&{
+           margin-left: 10px;
+       }
+       &:hover{
+           color: #fff;
+           border-color: #fff;
+       }
+    }
+ 
+}
+.portfolio__image-1{
+    grid-area: i1;
+}
+.portfolio__image-2{
+    grid-area: i2;
+}
+.portfolio__image-3{
+    grid-area: i3;
+}
+.portfolio__image-4{
+    grid-area: i4;
+}
+.portfolio__image-5{
+    grid-area: i5;
+}
+.portfolio__image-6{
+    grid-area: i6;
+ 
 }
 // end portfolio
 // start skills
@@ -338,11 +416,39 @@ img{
     }
 }
 // end skills
-// start count
-.count{
-
+// start counter
+.counter{
+padding: 100px 0 140px;
+border-top: 1px solid #eeeeee;
+&__inner{
+    display: flex;
+    justify-content: space-between;
 }
-// end count
+&__item{
+    text-align: center;
+}
+&__item-number{
+    @extend %motserrat;
+    font-size: 45px;
+    position: relative;
+    padding-bottom: 22px;
+    margin-bottom: 25px;
+    &::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 43px;
+        background-color: $red;
+    }
+}
+&__item-text{
+    font-size: 20px;
+}
+}
+// end counter
 // start price
 .price{
     padding: 135px 0 150px;
@@ -357,6 +463,11 @@ img{
         box-shadow: 0px 0px 8.55px 0.45px rgba(164, 164, 164, 0.75);
         background-color: #fff;
         text-align: center;
+        &:hover{
+            border-top: 4px solid $red;
+            min-height: 606px;
+            margin-top: -4px;
+        }
     }
     &__item-title{
         @extend %motserrat;
@@ -365,6 +476,7 @@ img{
         background-color: #f7f7f7;
         padding:50px 0 134px;
         border-bottom: 1px solid #cecccc;
+        text-transform: uppercase;
 
     }
     &__item-circle{
@@ -465,4 +577,89 @@ box-shadow: 0px 2px 4.75px 0.25px rgba(0, 0, 0, 0.25);
   
   
 // end price
+
+// start contacts
+.contacts{
+    padding: 135px 0 80px;
+    background-color: #2a2a2a;
+    &__inner{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__text{
+        max-width: 390px;
+        margin-bottom: 40px;
+    }
+    &__links{
+        display: flex;
+    }
+    &__link{
+        width: 40px;
+        height: 40px;
+        background-color: #434343;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &+&{
+            margin-left: 10px;
+        }
+    }
+    &__form{
+        max-width: 705px;
+        width: 100%;
+
+    }
+    &__form-input{
+        max-width: 338px;
+        width: 100%;
+        height: 50px;
+        background-color: transparent;
+        border: 1px solid #333333;
+        padding: 0 20px;
+        outline: none;
+        color: #fff;
+        &::placeholder{
+            @extend %motserrat;
+            font-size: 13px;
+            color: #999999;
+        }
+        &:focus{
+            border: 1px solid $red;
+        }
+        &+&{
+            margin-left: 25px;
+        }
+    }
+    &__form-text{
+        width: 100%;
+        height: 150px;
+        background-color: transparent;
+        border: 1px solid #333333;
+        outline: none;
+        padding: 30px 20px;
+        margin: 28px 0;
+        resize: none;
+color: #fff;
+        &::placeholder{
+            @extend %motserrat;
+            font-size: 13px;
+            color: #999999;
+        }
+        &:focus{
+            border: 1px solid $red;
+        }
+    }
+    &__form-btn{
+        height: 50px;
+        width: 100%;
+        text-align: center;
+        padding: 15px 15px;
+        color: #ffff;
+        background-color: $red;
+        @extend %motserrat;
+    }
+}
+
+// end contacts
 @import 'media';
